@@ -1,12 +1,14 @@
 """Case-study #3 Анализ текста
 Разработчики:
-Силкачев В.В., Попов К.Б., Винников А.А. 35%
+Силкачев В.В. 37% Попов К.Б., Винников А.А. 35%
 
 """
+from textblob import TextBlob
 
 text = input("Введите текст:")
 
 sentens = text.split('. ')
+
 count_sentens = len(sentens)
 list_of_words = []
 count_words = 0
@@ -20,25 +22,25 @@ list_1 = list('аиоеуэяыюёЁУЕЫАОЭЮИЯ')
 for i in list_1:
     count_syllables += text.count(i)
 ASW = count_syllables / count_words
+
 FRE = 206.835 - (1.3 * ASL) - (60.1 * ASW)
 
+TextForBlob = TextBlob(text)
+if TextForBlob.detect_language() == 'en':
+    Ton = TextForBlob.sentiment.polarity
+    Sbj = TextForBlob.sentiment.subjectivity
+    print('Обьективность: ', (1 - Sbj) * 100, '%')
+    print('Тональность: ', Ton)
 
-
-
-
-
-
-
-
-print ('Предложений:',count_sentens)
-print ('Слов:',count_words)
-print ('Слогов:',count_syllables)
-print ('Средняя длина предложения в словах:', '{:.3f}'.format(ASL))
-print ('Средняя длина слова в слогах:','{:.2f}'.format(ASW))
-print ('Индекс удобочитаемости Флеша:',FRE)
+print('Предложений:', count_sentens)
+print('Слов:', count_words)
+print('Слогов:', count_syllables)
+print('Средняя длина предложения в словах:', '{:.3f}'.format(ASL))
+print('Средняя длина слова в слогах:', '{:.2f}'.format(ASW))
+print('Индекс удобочитаемости Флеша:', FRE)
 if FRE <= 25:
     print('Текст трудно читается (для выпускников ВУЗов).')
-elif FRE <=50:
+elif FRE <= 50:
     print('Текст немного трудно читать (для студентов).')
 elif FRE <= 80:
     print('Простой текст (для школьников).')
