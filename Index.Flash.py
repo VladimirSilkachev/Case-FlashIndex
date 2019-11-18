@@ -4,8 +4,9 @@
 
 """
 from textblob import TextBlob
+import local as lc
 
-text = input("Введите текст:")
+text = input(lc.enter)
 
 sentens = text.split('. ')
 
@@ -26,29 +27,29 @@ ASW = count_syllables / count_words
 FRE = 206.835 - (1.3 * ASL) - (60.1 * ASW)
 
 
-print('Предложений:', count_sentens)
-print('Слов:', count_words)
-print('Слогов:', count_syllables)
-print('Средняя длина предложения в словах:', '{:.3f}'.format(ASL))
-print('Средняя длина слова в слогах:', '{:.2f}'.format(ASW))
-print('Индекс удобочитаемости Флеша:', FRE)
+print(lc.sent, count_sentens)
+print(lc.words, count_words)
+print(lc.syll, count_syllables)
+print(lc.average_length_words, '{:.3f}'.format(ASL))
+print(lc.aver_len_syllable, '{:.2f}'.format(ASW))
+print(lc.flesh_index, FRE)
 if FRE <= 25:
-    print('Текст трудно читается (для выпускников ВУЗов).')
+    print(lc.hard)
 elif FRE <= 50:
-    print('Текст немного трудно читать (для студентов).')
+    print(lc.average)
 elif FRE <= 80:
-    print('Простой текст (для школьников).')
+    print(lc.easy)
 else:
-    print('Текст очень легко читается (для младших школьников).')
+    print(lc.very_easy)
 
 TextForBlob = TextBlob(text)
 if TextForBlob.detect_language() == 'en':
     Ton = (TextForBlob.sentiment.polarity) * 100
     Sbj = TextForBlob.sentiment.subjectivity
-    print('Обьективность: ', (1 - Sbj) * 100, '%')
+    print(lc.obj, (1 - Sbj) * 100, '%')
     if Ton < 0:
-        print('Тональность текста: негативный')
+        print(lc.negative)
     elif 0 < Ton < 50:
-        print('Тональность текста: нейтральный')
+        print(lc.neutral)
     else:
-        print('Тональность текста: позитивный')
+        print(lc.positive)
