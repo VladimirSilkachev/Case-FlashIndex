@@ -25,12 +25,6 @@ ASW = count_syllables / count_words
 
 FRE = 206.835 - (1.3 * ASL) - (60.1 * ASW)
 
-TextForBlob = TextBlob(text)
-if TextForBlob.detect_language() == 'en':
-    Ton = TextForBlob.sentiment.polarity
-    Sbj = TextForBlob.sentiment.subjectivity
-    print('Обьективность: ', (1 - Sbj) * 100, '%')
-    print('Тональность: ', Ton)
 
 print('Предложений:', count_sentens)
 print('Слов:', count_words)
@@ -46,3 +40,15 @@ elif FRE <= 80:
     print('Простой текст (для школьников).')
 else:
     print('Текст очень легко читается (для младших школьников).')
+
+TextForBlob = TextBlob(text)
+if TextForBlob.detect_language() == 'en':
+    Ton = TextForBlob.sentiment.polarity
+    Sbj = TextForBlob.sentiment.subjectivity
+    print('Обьективность: ', (1 - Sbj) * 100, '%')
+    if Ton < 0:
+        print('Тональность текста: негативный')
+    elif 0 < Ton < 50:
+        print('Тональность текста: нейтральный')
+    else:
+        print('Тональность текста: позитивный')
