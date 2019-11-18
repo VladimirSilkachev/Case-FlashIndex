@@ -43,7 +43,7 @@ else:
 
 TextForBlob = TextBlob(text)
 if TextForBlob.detect_language() == 'en':
-    Ton = TextForBlob.sentiment.polarity
+    Ton = (TextForBlob.sentiment.polarity) * 100
     Sbj = TextForBlob.sentiment.subjectivity
     print('Обьективность: ', (1 - Sbj) * 100, '%')
     if Ton < 0:
