@@ -18,7 +18,7 @@ for j in sentens:
 ASL = count_words / count_sentens
 
 count_syllables = 0
-list_1 = list('аиоеуэяыюёЁУЕЫАОЭЮИЯ')
+list_1 = list('аиоеуэяыюёЁУЕЫАОЭЮИЯeyuioaEYUIOA')
 for i in list_1:
     count_syllables += text.count(i)
 ASW = count_syllables / count_words
